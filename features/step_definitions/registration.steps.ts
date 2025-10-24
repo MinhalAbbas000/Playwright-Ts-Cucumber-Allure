@@ -2,8 +2,7 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import { CustomWorld } from '../hooks/world';
 import { expect } from 'playwright/test';
 
-
-
+// Step Definitions for Registration Page
 Given('I navigate to the registration page', async function (this: CustomWorld) {
     await this.page.goto("https://www.way2automation.com/way2auto_jquery/index.php");
     expect(this.page.url()).toContain('/way2auto_jquery/');
