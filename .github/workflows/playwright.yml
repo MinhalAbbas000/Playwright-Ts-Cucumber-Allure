@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -25,18 +30,21 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      # 🧪 Run your cucumber tests using the script from package.json
-      - name: Run Playwright Cucumber Tests
-        run: npm run test
-        continue-on-error: true
+      - name: Run Cucumber tests (ignore failures so report still generates)
+        run: npm run test || true
 
-      # 🧾 Generate Allure report after tests
       - name: Generate Allure Report
         run: npm run allure:generate
 
-      # 📤 Upload the Allure report folder so you can view/download it from GitHub
-      - name: Upload Allure Report Artifact
+      - name: Upload Allure Report as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: allure-report
+
+      # 🪄 This step uploads the Allure report to GitHub Pages
+      - name: Deploy Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
