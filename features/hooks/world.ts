@@ -12,7 +12,7 @@ export class CustomWorld extends World {
        super(options);
    }            
     async init() {
-        this.browser = await chromium.launch({ headless: false });
+        this.browser = await chromium.launch({ headless: true });
         this.context = await this.browser.newContext({
   recordVideo: { dir: 'videos/' },
 });
