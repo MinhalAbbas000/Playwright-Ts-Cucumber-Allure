@@ -1,7 +1,7 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
 "As a user
     I want to register for an account
-    So that I can access the application","11363","Validating the Registration Feature","","Mon Oct 27 07:08:09 UTC 2025","passed","Mon Oct 27 07:08:20 UTC 2025","","","",""
+    So that I can access the application","39988","Validating the Registration Feature","","Mon Oct 27 07:18:01 UTC 2025","broken","Mon Oct 27 07:18:41 UTC 2025","","","",""
 "As a user
     I want to register for an account
-    So that I can access the application","8339","Validating the Registration Feature","","Mon Oct 27 07:08:20 UTC 2025","passed","Mon Oct 27 07:08:28 UTC 2025","","","",""
+    So that I can access the application","38793","Validating the Registration Feature","","Mon Oct 27 07:18:41 UTC 2025","broken","Mon Oct 27 07:19:19 UTC 2025","","","",""
