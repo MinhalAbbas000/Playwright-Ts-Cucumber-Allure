@@ -6,7 +6,7 @@
         "name":"//input[@name='name']",
         "phone":"//input[@name='phone']",
         "email":"//input[@name='email']",
-        "country":"//select[@name='country']",
+        "country":"//select[@name='countryi']",
         "city":"//input[@name='city']",
         "username":"//div[@id='load_box']//input[@name='username']",
         "password":"//div[@id='load_box']//input[@name='password']",
