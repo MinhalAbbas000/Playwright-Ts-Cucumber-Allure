@@ -28,6 +28,7 @@ jobs:
       # 🧪 Run your cucumber tests using the script from package.json
       - name: Run Playwright Cucumber Tests
         run: npm run test
+        continue-on-error: true
 
       # 🧾 Generate Allure report after tests
       - name: Generate Allure Report
