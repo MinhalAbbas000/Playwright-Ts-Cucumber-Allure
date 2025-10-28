@@ -1,43 +1,38 @@
 name: Playwright Cucumber Tests
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
-  test:
+  test-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
-      - name: Run Cucumber tests (ignore failures so report still generates)
-        run: npm run test || true
+      - name: Run Playwright Cucumber tests
+        id: tests
+        run: npm run test
 
       - name: Generate Allure Report
+        if: always() # Generate report even if tests fail
         run: npm run allure:generate
 
-
-      - name: Deploy Unique Allure Report to GitHub Pages
+      - name: Deploy Allure report to GitHub Pages
+        if: always() # Deploy even if tests fail
+        id: deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -45,9 +40,16 @@ jobs:
           destination_dir: reports/build-${{ github.run_number }}
           keep_files: true
 
-      - name: Add Allure Report Link to Summary
-        if: success() || failure()
+      - name: Add summary with test result ✨
+        if: always()
         run: |
           REPORT_URL="https://minhalabbas000.github.io/Playwright-Ts-Cucumber-Allure/reports/build-${{ github.run_number }}/"
-          echo "🔗 **[View Allure Report for Build #${{ github.run_number }}](${REPORT_URL})**" >> $GITHUB_STEP_SUMMARY
-          echo "Allure report for Build #${{ github.run_number }} available at: $REPORT_URL"
+
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "### 🟢 All Tests Passed!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### 🔴 Some Tests Failed!" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "[Click here to view the Allure Report 🔗](${REPORT_URL})" >> $GITHUB_STEP_SUMMARY
