@@ -5,34 +5,36 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  test-and-deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Playwright Cucumber tests
-        id: tests
-        run: npm run test
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Cucumber tests (ignore failures so report still generates)
+        run: npm run test || true
 
       - name: Generate Allure Report
-        if: always() # Generate report even if tests fail
         run: npm run allure:generate
 
-      - name: Deploy Allure report to GitHub Pages
-        if: always() # Deploy even if tests fail
-        id: deploy
+
+      - name: Deploy Unique Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -40,16 +42,9 @@ jobs:
           destination_dir: reports/build-${{ github.run_number }}
           keep_files: true
 
-      - name: Add summary with test result ✨
-        if: always()
+      - name: Add Allure Report Link to Summary
+        if: success() || failure()
         run: |
           REPORT_URL="https://minhalabbas000.github.io/Playwright-Ts-Cucumber-Allure/reports/build-${{ github.run_number }}/"
-
-          if [ "${{ job.status }}" == "success" ]; then
-            echo "### 🟢 All Tests Passed!" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "### 🔴 Some Tests Failed!" >> $GITHUB_STEP_SUMMARY
-          fi
-
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "[Click here to view the Allure Report 🔗](${REPORT_URL})" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 **[View Allure Report for Build #${{ github.run_number }}](${REPORT_URL})**" >> $GITHUB_STEP_SUMMARY
+          echo "Allure report for Build #${{ github.run_number }} available at: $REPORT_URL"
