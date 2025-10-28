@@ -36,15 +36,17 @@ jobs:
       - name: Generate Allure Report
         run: npm run allure:generate
 
-      - name: Upload Allure Report as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: allure-report
-
-      # 🪄 This step uploads the Allure report to GitHub Pages
-      - name: Deploy Allure Report to GitHub Pages
+      - name: Deploy Unique Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
+          destination_dir: reports/build-${{ github.run_number }}
+          keep_files: true 
+
+      - name: Add Allure Report Link to Summary
+        if: success() || failure()
+        run: |
+          REPORT_URL="https://minhalabbas000.github.io/Playwright-Ts-Cucumber-Allure/reports/build-${{ github.run_number }}/"
+          echo "🔗 **[View Allure Report for Build #${{ github.run_number }}](${REPORT_URL})**" >> $GITHUB_STEP_SUMMARY
+          echo "Allure report for Build #${{ github.run_number }} available at: $REPORT_URL"
