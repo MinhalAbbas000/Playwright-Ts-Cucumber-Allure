@@ -45,23 +45,6 @@ jobs:
           destination_dir: reports/build-${{ github.run_number }}
           keep_files: true
 
-
-      - name: Cleanup old Allure reports (older than 14 days)
-        run: |
-          echo "Cleaning up old reports older than 14 days..."
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin gh-pages
-          git checkout gh-pages
-
-          # Delete directories older than 14 days
-          find reports/ -type d -name "build-*" -mtime +14 -exec rm -rf {} +
-
-          git add reports || true
-          git commit -m "🧹 Remove reports older than 14 days" || echo "No old reports to remove"
-          git push origin gh-pages
-        shell: bash
-
       - name: Add Allure Report Link to Summary
         if: success() || failure()
         run: |
