@@ -12,7 +12,8 @@ export class CustomWorld extends World {
        super(options);
    }            
     async init() {
-        this.browser = await chromium.launch({ headless: true });
+        const isHeadless = process.env.CI === "true" || process.env.HEADLESS === "true";
+        this.browser = await chromium.launch({ headless: isHeadless });
         this.context = await this.browser.newContext({
   recordVideo: { dir: 'videos/' },
 });
