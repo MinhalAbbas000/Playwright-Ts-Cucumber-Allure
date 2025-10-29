@@ -7,6 +7,13 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 .env
+
+# Allure
 /allure-report/
 /allure-results/
-/reports/
+
+# Custom reports (Cucumber, videos, screenshots)
+reports/
+videos/
+screenshots/
+traces/
