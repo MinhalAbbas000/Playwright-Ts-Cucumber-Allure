@@ -1,7 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"As a user
-    I want to register for an account
-    So that I can access the application","14271","Validating the Registration Feature","","Thu Oct 23 12:28:17 PKT 2025","passed","Thu Oct 23 12:28:31 PKT 2025","","","",""
-"As a user
-    I want to register for an account
-    So that I can access the application","14006","Validating the Registration Feature","","Thu Oct 23 12:28:31 PKT 2025","passed","Thu Oct 23 12:28:45 PKT 2025","","","",""
