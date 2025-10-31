@@ -1,1 +1,0 @@
-Video recorded: C:\Users\abbasmin\Desktop\Playwright-ts-cucumber-Allure-report\reports\videos\Validating_the_Registration_Feature.webm

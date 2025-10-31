@@ -1,1 +1,0 @@
-Trace file: C:\Users\abbasmin\Desktop\Playwright-ts-cucumber-Allure-report\reports\traces\Validating_the_Registration_Feature.zip
