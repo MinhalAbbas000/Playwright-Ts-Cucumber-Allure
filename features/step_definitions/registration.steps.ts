@@ -1,19 +1,23 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { CustomWorld } from '../hooks/world';
 import { expect } from 'playwright/test';
+import { Assert } from '../../utils/assert';
 
 // Step Definitions for Registration Page
 Given('I navigate to the registration page', async function (this: CustomWorld) {
-    await this.page.goto("https://www.way2automation.com/way2auto_jquery/index.php");
-    expect(this.page.url()).toContain('/way2auto_jquery/');
-});
+  await this.page.goto("https://www.way2automation.com/way2auto_jquery/index.php");
 
+  const currentUrl = this.page.url();
+  await Assert.that(async () => {
+    expect(currentUrl).toContain("/way2auto_jquery!/");
+  }, "Navigation to registration page failed")
+}
+);
 
 
 When('I enter the name as {string}', async function (this:CustomWorld,name: string) {
     await this.pages.registrationPage.set_name(name);
 });
-
 
 
 Then('I enter the phone number as {string}', async function (this:CustomWorld,phoneNumber: string) {

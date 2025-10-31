@@ -5,6 +5,29 @@ import { CustomWorld } from './world';
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 
+BeforeAll(async function () {
+  const allureResults = path.resolve("./allure-results");
+  const allureReport = path.resolve("./allure-report");
+
+  // Preserve Allure history before cleaning
+  const historySrc = path.join(allureReport, "history");
+  const historyDest = path.join(allureResults, "history");
+
+  if (fs.existsSync(historySrc)) {
+    await fs.promises.mkdir(allureResults, { recursive: true });
+    fs.cpSync(historySrc, historyDest, { recursive: true });
+  }
+
+  // Clean previous run data except history
+  const items = await fs.promises.readdir(allureResults).catch(() => []);
+  for (const item of items) {
+    if (item !== "history") {
+      await fs.promises.rm(path.join(allureResults, item), { recursive: true, force: true });
+    }
+  }
+
+  console.log("🧹 Cleaned allure-results (kept history if present)");
+});
 
 After(async function (this: CustomWorld) {
     await this.close();
