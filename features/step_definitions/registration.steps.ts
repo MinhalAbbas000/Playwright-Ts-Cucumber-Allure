@@ -9,7 +9,7 @@ Given('I navigate to the registration page', async function (this: CustomWorld) 
 
   const currentUrl = this.page.url();
   await Assert.that(async () => {
-    expect(currentUrl).toContain("/way2auto_jquery!/");
+    expect(currentUrl).toContain("/way2auto_jquery/");
   }, "Navigation to registration page failed")
 }
 );
