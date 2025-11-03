@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './base-page';
-import allLocators from '../../locators/locators.json';
+import allLocators from '../locators/locators.json';
 
 
 export class RegistrationPage extends BasePage {

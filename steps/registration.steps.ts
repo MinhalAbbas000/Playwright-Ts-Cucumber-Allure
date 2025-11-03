@@ -1,7 +1,7 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import { CustomWorld } from '../hooks/world';
+import { CustomWorld } from '../support/world';
 import { expect } from 'playwright/test';
-import { Assert } from '../../utils/assert';
+import { Assert } from '../utils/assert';
 
 // Step Definitions for Registration Page
 Given('I navigate to the registration page', async function (this: CustomWorld) {

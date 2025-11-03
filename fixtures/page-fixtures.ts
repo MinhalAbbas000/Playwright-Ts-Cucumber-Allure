@@ -1,7 +1,5 @@
 import { Page } from 'playwright';
-import { RegistrationPage } from '../features/pageobjects/regiestration-page';
-
-
+import { RegistrationPage } from '../pages/regiestration-page';
 
 export class PageFixture {
 
@@ -16,8 +14,5 @@ export class PageFixture {
         this.registrationPage = new RegistrationPage(page);
 
     }
-
-
-
 
 }

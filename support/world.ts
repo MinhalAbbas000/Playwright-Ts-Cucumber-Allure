@@ -1,6 +1,6 @@
 import { setWorldConstructor, IWorldOptions,World,setDefaultTimeout  } from "@cucumber/cucumber";
 import {Page, Browser, chromium, BrowserContext} from 'playwright';
-import { PageFixture } from "../../fixtures/page-fixtures";
+import { PageFixture } from "../fixtures/page-fixtures";
 setDefaultTimeout(60 * 1000);
 export class CustomWorld extends World {
    public page!: Page;
