@@ -1,10 +1,10 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { CustomWorld } from '../support/world';
 import { expect } from 'playwright/test';
-import { Assert } from '../utils/assert';
+import { Assert } from '../../utils/assert';
 
 // Step Definitions for Registration Page
-Given('I navigate to the registration page', async function (this: CustomWorld) {
+Given('I navigate to the registration page', async function () {
   await this.page.goto("https://www.way2automation.com/way2auto_jquery/index.php");
 
   const currentUrl = this.page.url();
@@ -15,46 +15,46 @@ Given('I navigate to the registration page', async function (this: CustomWorld) 
 );
 
 
-When('I enter the name as {string}', async function (this:CustomWorld,name: string) {
+When('I enter the name as {string}', async function (name: string) {
     await this.pages.registrationPage.set_name(name);
 });
 
 
-Then('I enter the phone number as {string}', async function (this:CustomWorld,phoneNumber: string) {
+Then('I enter the phone number as {string}', async function (phoneNumber: string) {
     await this.pages.registrationPage.set_phone_no(phoneNumber);
-});
+}); 
 
 
 
-Then('I enter the email as {string}', async function (this:CustomWorld,email:string) {
+Then('I enter the email as {string}', async function (email:string) {
 await this.pages.registrationPage.set_email(email);
 });
 
 
-Then('I select the country as {string}', async function (this:CustomWorld,country:string) {
+Then('I select the country as {string}', async function (country:string) {
 await this.pages.registrationPage.set_country(country);
 });
 
 
-Then('I enter the city as {string}', async function (this:CustomWorld,city:string) {
+Then('I enter the city as {string}', async function (city:string) {
 await this.pages.registrationPage.set_city(city);
 });
 
 
 
-Then('I enter the username as {string}', async function (this:CustomWorld,username:string) {
+Then('I enter the username as {string}', async function (username:string) {
 await this.pages.registrationPage.set_username(username);
 });
 
 
 
-Then('I enter the password as {string}', async function (this:CustomWorld,password:string) {
+Then('I enter the password as {string}', async function (password:string) {
 await this.pages.registrationPage.set_password(password);
 });
 
 
 
-Then('I click the register button', async function (this:CustomWorld) {
+Then('I click the register button', async function () {
 await this.pages.registrationPage.submit_form();
 await this.page.waitForTimeout(3000);
 });

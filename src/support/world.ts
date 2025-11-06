@@ -1,12 +1,14 @@
 import { setWorldConstructor, IWorldOptions,World,setDefaultTimeout  } from "@cucumber/cucumber";
 import {Page, Browser, chromium, BrowserContext} from 'playwright';
-import { PageFixture } from "../fixtures/page-fixtures";
+import { PageManager } from "../pages/pageManager";
+
 setDefaultTimeout(60 * 1000);
 export class CustomWorld extends World {
+    
    public page!: Page;
    public browser!: Browser;
    public context!: BrowserContext;
-   public pages!: PageFixture;   
+   public pages!: PageManager;   
    
    constructor(options: IWorldOptions) {
        super(options);
@@ -15,7 +17,7 @@ export class CustomWorld extends World {
         const isHeadless = process.env.CI === "true" || process.env.HEADLESS === "true";
         this.browser = await chromium.launch({ headless: isHeadless });
         this.context = await this.browser.newContext({
-  recordVideo: { dir: 'videos/' },
+        recordVideo: { dir: 'videos/' },
 });
 
         await this.context.tracing.start({
@@ -23,7 +25,8 @@ export class CustomWorld extends World {
             snapshots: true,
         });
         this.page = await this.context.newPage();
-        this.pages = new PageFixture(this.page);
+       // this.pages = new PageFixture(this.page);
+        this.pages = new PageManager(this.page);
     }
 
     async close(){
