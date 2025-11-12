@@ -1,6 +1,11 @@
 import { setWorldConstructor, IWorldOptions,World,setDefaultTimeout  } from "@cucumber/cucumber";
-import {Page, Browser, chromium, BrowserContext} from 'playwright';
+import {Page, Browser, chromium, firefox,webkit, BrowserContext} from 'playwright';
 import { PageManager } from "../pages/pageManager";
+import * as dotenv from "dotenv";
+import * as path from "path";
+import { ConfigManager } from "../config/configManager";
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
+
 
 setDefaultTimeout(60 * 1000);
 export class CustomWorld extends World {
@@ -14,8 +19,16 @@ export class CustomWorld extends World {
        super(options);
    }            
     async init() {
-        const isHeadless = process.env.CI === "true" || process.env.HEADLESS === "true";
-        this.browser = await chromium.launch({ headless: isHeadless });
+        const env = ConfigManager.get("env");
+        const browserName = ConfigManager.get("browser");
+        const isheadless = ConfigManager.get("headless") as boolean;
+        const baseUrl = ConfigManager.get("baseUrl");
+
+        const browsers = { chromium, firefox, webkit };
+        const browserType = browsers[browserName as keyof typeof browsers];
+        console.log(`Running on ENV=${env}, BROWSER=${browserName}, HEADLESS=${isheadless}`);
+
+        this.browser = await browserType.launch({ headless:isheadless});
         this.context = await this.browser.newContext({
         recordVideo: { dir: 'videos/' },
 });
@@ -25,7 +38,7 @@ export class CustomWorld extends World {
             snapshots: true,
         });
         this.page = await this.context.newPage();
-       // this.pages = new PageFixture(this.page);
+
         this.pages = new PageManager(this.page);
     }
 

@@ -2,10 +2,11 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import { CustomWorld } from '../support/world';
 import { expect } from 'playwright/test';
 import { Assert } from '../../utils/assert';
+import { ConfigManager } from '../config/configManager';
 
 // Step Definitions for Registration Page
 Given('I navigate to the registration page', async function () {
-  await this.page.goto("https://www.way2automation.com/way2auto_jquery/index.php");
+  await this.page.goto(`${ConfigManager.get("baseUrl")}/way2auto_jquery/index.php`);
 
   const currentUrl = this.page.url();
   await Assert.that(async () => {
@@ -16,14 +17,15 @@ Given('I navigate to the registration page', async function () {
 
 
 When('I enter the name as {string}', async function (name: string) {
-    await this.pages.registrationPage.set_name(name);
+    const { username, password } = ConfigManager.get("credentials");
+    await this.pages.registrationPage.set_name(username);
 });
 
 
 Then('I enter the phone number as {string}', async function (phoneNumber: string) {
-    await this.pages.registrationPage.set_phone_no(phoneNumber);
+  const { username, password } = ConfigManager.get("credentials");
+    await this.pages.registrationPage.set_phone_no(password);
 }); 
-
 
 
 Then('I enter the email as {string}', async function (email:string) {

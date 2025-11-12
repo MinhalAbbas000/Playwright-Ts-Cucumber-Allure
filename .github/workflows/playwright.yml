@@ -2,15 +2,37 @@ name: Playwright Cucumber Tests
 
 on:
   workflow_dispatch:
+  inputs:
+    environment:
+      description: "Select environment (qa, staging, prod)"
+      required: true
+      default: "qa"
+    browser:
+      description: "Select browser (chromium, firefox, webkit)"
+      required: true
+      default: "chromium"
 
 permissions:
   contents: write
   pages: write
   id-token: write
+  
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      ENV: ${{ github.event.inputs.environment }}
+      BROWSER: ${{ github.event.inputs.browser }}
+      HEADLESS: true
+
+      # Add your secret credentials here
+      QA_USERNAME: ${{ secrets.QA_USERNAME }}
+      QA_PASSWORD: ${{ secrets.QA_PASSWORD }}
+      STAGING_USERNAME: ${{ secrets.STAGING_USERNAME }}
+      STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
+      PROD_USERNAME: ${{ secrets.PROD_USERNAME }}
+      PROD_PASSWORD: ${{ secrets.PROD_PASSWORD }}
 
     steps:
       - name: Checkout repository
