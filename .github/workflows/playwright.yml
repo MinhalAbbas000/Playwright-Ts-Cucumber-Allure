@@ -49,7 +49,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Cucumber tests (ignore failures so report still generates)
-        run: npm run test || true
+        run: npx cross-env ENV=${{ env.ENV }} BROWSER=${{ env.BROWSER }} npm run test || true
 
       - name: Generate Allure Report
         run: npm run allure:generate
