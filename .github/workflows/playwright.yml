@@ -2,15 +2,15 @@ name: Playwright Cucumber Tests
 
 on:
   workflow_dispatch:
-  inputs:
-    environment:
-      description: "Select environment (qa, staging, prod)"
-      required: true
-      default: "qa"
-    browser:
-      description: "Select browser (chromium, firefox, webkit)"
-      required: true
-      default: "chromium"
+    inputs:
+      environment:
+        description: "Select environment (qa, staging, prod)"
+        required: true
+        default: "qa"
+      browser:
+        description: "Select browser (chromium, firefox, webkit)"
+        required: true
+        default: "chromium"
 
 permissions:
   contents: write
@@ -24,7 +24,6 @@ jobs:
     env:
       ENV: ${{ github.event.inputs.environment }}
       BROWSER: ${{ github.event.inputs.browser }}
-      HEADLESS: true
 
       # Add your secret credentials here
       QA_USERNAME: ${{ secrets.QA_USERNAME }}
