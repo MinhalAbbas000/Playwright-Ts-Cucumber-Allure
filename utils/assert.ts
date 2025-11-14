@@ -24,6 +24,7 @@ export class Assert {
         error.message?.includes("toContain") ||
         error.message?.includes("toHave") ||
         error.message?.includes("toMatch") ||
+        error.message?.includes("visible") ||
         error.message?.includes("not ");
              if(isPlaywrightAssertion) {
                 // Re-throw cleanly so Allure marks it as FAILED

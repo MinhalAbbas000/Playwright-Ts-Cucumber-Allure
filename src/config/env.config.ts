@@ -1,11 +1,11 @@
 export const EnvConfig = {
   qa: {
-    baseUrl: 'https://www.way2automation.com',
+    baseUrl: 'https://www.saucedemo.com/',
   },
   staging: {
-    baseUrl: 'https://www.StagingWay2automation.com',
+    baseUrl: 'https://www.stagingsaucedemo.com/',
   },
   prod: {
-    baseUrl: 'https://myapp.com',
+    baseUrl: 'https://www.prodsaucedemo.com/',
   },
 };
