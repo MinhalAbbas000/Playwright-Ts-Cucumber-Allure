@@ -39,12 +39,18 @@ export class ConfigManager {
     return { username, password };
   }
 
+  private static getCurrencyStymbol(): string {
+    const env = this.getEnv();
+    return EnvConfig[env as keyof typeof EnvConfig].currency || 'USD';
+  }
+
   public static get(key: "env"): string;
   public static get(key: "browser"): string;
   public static get(key: "headless"): boolean;
   public static get(key: "baseUrl"): string;
+  public static get(key: "currency"): string;
   public static get(key: "credentials"): { username: string; password: string };
-  public static get(key: "env" | "browser" | "headless" | "baseUrl" | "credentials") {
+  public static get(key: "env" | "browser" | "headless" | "baseUrl" | "credentials" | "currency"): any {
    switch (key) {
     case "env":
       return this.getEnv();
@@ -56,6 +62,8 @@ export class ConfigManager {
       return this.getBaseUrl();
     case "credentials":
       return this.getCredentials();
+    case "currency":
+      return this.getCurrencyStymbol();
     default:
       throw new Error(`Unknown config key: ${key}`);
   }

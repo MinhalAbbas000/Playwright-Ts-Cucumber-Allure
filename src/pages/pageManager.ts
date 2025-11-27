@@ -7,7 +7,7 @@ export class PageManager {
     private _page: Page;
     private _registrationPage?: RegistrationPage ;
     private _loginPage?: LoginPage;
-    private _productsPage?: any;
+    private _productsPage?: ProductsPage;
 
     constructor(page: Page) {
         this._page = page;

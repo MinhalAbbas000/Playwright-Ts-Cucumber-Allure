@@ -1,4 +1,6 @@
 import {Page} from '@playwright/test';
+import { Routes, RouteKey } from "../routes";
+import { ConfigManager } from '../config/configManager';
 
 export class BasePage {
     protected page: Page;
@@ -7,6 +9,11 @@ export class BasePage {
         this.page = page;
     }
 
+    async naigateToRoute(routeKey: RouteKey) {
+        const baseUrl = ConfigManager.get("baseUrl");
+        const route = Routes[routeKey];
+        await this.page.goto(baseUrl + route);
+    }
 
     async click(locator: string) {
         await this.page.locator(locator).click();

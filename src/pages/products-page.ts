@@ -1,7 +1,5 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './base-page';
-
-
 export class ProductsPage extends BasePage  {
     readonly productList: Locator;
     readonly addToCartButton: Locator;
@@ -11,15 +9,31 @@ export class ProductsPage extends BasePage  {
 
     constructor(page: Page) {
         super(page)
-        this.productList = page.locator('[data-testid="product-list"]');
+        this.productList = page.locator('[data-test="inventory-list"]');
         this.addToCartButton = page.locator('button:has-text("Add to Cart")');
-        this.productTitle = page.locator('[data-testid="product-title"]');
-        this.productPrice = page.locator('[data-testid="product-price"]');
+        this.productTitle = page.locator('[data-test="inventory-item-name"]');
+        this.productPrice = page.locator('[data-test="inventory-item-price"]');
         this.divInventory = page.locator('#inventory_container');
     }
 
-    async navigate() {
-        await this.page.goto('/products');
+     productLocatorByName(productName: string): Locator {
+        return this.page.locator(`.inventory_item:has-text("${productName}")`);
     }
 
+    async getProductPrice(productName: string): Promise<number> {
+        let productPrice : number;
+        let productPriceText = await (this.productLocatorByName(productName).locator('.inventory_item_price')).textContent();
+        productPrice = Number(productPriceText?.replace('$', '') || '0');
+        return productPrice;
+    }
+
+    async getProductDescription(productName: string): Promise<string> {
+        let productDescription = await (this.productLocatorByName(productName).locator('.inventory_item_desc')).textContent();
+        return productDescription || "";
+    }
+
+   async getAllPrices():Promise<string[]> {
+        const prices = await this.productPrice.allTextContents();
+        return prices;
+    }
 }

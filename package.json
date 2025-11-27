@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js features/registration.feature",
+    "test": "cucumber-js features/login.feature",
+    "dry-run": "npx cucumber-js --dry-run --format summary --config cucumber.json",
     "allure:generate": "npx allure generate allure-results --clean -o allure-report",
     "allure:open": "npx allure open allure-report",
     "test:report": "cmd /c \"npm run test || exit 0\" && npm run allure:generate && npm run allure:open"
