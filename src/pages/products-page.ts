@@ -1,5 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './base-page';
+
 export class ProductsPage extends BasePage  {
     readonly productList: Locator;
     readonly addToCartButton: Locator;
@@ -36,4 +37,9 @@ export class ProductsPage extends BasePage  {
         const prices = await this.productPrice.allTextContents();
         return prices;
     }
+
+   async clickOnProductTitle(productTitle:string): Promise<void> {
+
+       await this.click((this.productLocatorByName(productTitle).locator('.inventory_item_name')));
+   }
 }

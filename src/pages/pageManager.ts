@@ -1,24 +1,16 @@
 import { Page } from '@playwright/test';
-import {RegistrationPage} from '../pages/regiestration-page';
-import {LoginPage} from '../pages/login-page';
+import { LoginPage } from '../pages/login-page';
 import { ProductsPage } from '../pages/products-page';
+import { ProductDetailsPage } from './productDetails-page';
 
 export class PageManager {
     private _page: Page;
-    private _registrationPage?: RegistrationPage ;
     private _loginPage?: LoginPage;
     private _productsPage?: ProductsPage;
+    private _productDetailsPage?: ProductDetailsPage;
 
     constructor(page: Page) {
         this._page = page;
-    }
-
-    get registrationPage()
-    {
-        if(!this._registrationPage){
-            this._registrationPage = new RegistrationPage(this._page);
-        }
-        return this._registrationPage;
     }
 
     get loginPage()
@@ -35,6 +27,15 @@ export class PageManager {
             this._productsPage = new ProductsPage(this._page);
         }
         return this._productsPage                   
-    }   
+    }
+    
+    get productDetailsPage()
+    {
+        if(!this._productDetailsPage)
+        {
+            this._productDetailsPage = new ProductDetailsPage(this._page);
+        }
+        return this._productDetailsPage;
+    }
 
 }

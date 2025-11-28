@@ -1,4 +1,4 @@
-import {Page} from '@playwright/test';
+import {Locator, Page} from '@playwright/test';
 import { Routes, RouteKey } from "../routes";
 import { ConfigManager } from '../config/configManager';
 
@@ -15,8 +15,8 @@ export class BasePage {
         await this.page.goto(baseUrl + route);
     }
 
-    async click(locator: string) {
-        await this.page.locator(locator).click();
+    async click(locator: Locator) {
+        await locator.click();
     }
 
     async type(locator: string, value: string) {
