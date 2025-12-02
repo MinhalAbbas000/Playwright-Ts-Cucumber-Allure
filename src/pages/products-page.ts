@@ -7,6 +7,7 @@ export class ProductsPage extends BasePage  {
     readonly productTitle: Locator;
     readonly productPrice: Locator;
     readonly divInventory: Locator;
+    readonly cartBadge: Locator;
 
     constructor(page: Page) {
         super(page)
@@ -15,6 +16,7 @@ export class ProductsPage extends BasePage  {
         this.productTitle = page.locator('[data-test="inventory-item-name"]');
         this.productPrice = page.locator('[data-test="inventory-item-price"]');
         this.divInventory = page.locator('#inventory_container');
+        this.cartBadge = page.locator(".shopping_cart_badge");
     }
 
      productLocatorByName(productName: string): Locator {
@@ -42,4 +44,8 @@ export class ProductsPage extends BasePage  {
 
        await this.click((this.productLocatorByName(productTitle).locator('.inventory_item_name')));
    }
+
+   getAddToCartButtonByProductName(productName: string): Locator {
+       return this.productLocatorByName(productName).locator('button:has-text("Add to Cart")');
+   }    
 }
