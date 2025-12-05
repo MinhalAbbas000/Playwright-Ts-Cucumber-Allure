@@ -4,6 +4,7 @@ import { PageManager } from "../pages/pageManager";
 import * as dotenv from "dotenv";
 import * as path from "path";
 import { ConfigManager } from "../config/configManager";
+import { Product } from "../types";
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 
@@ -13,7 +14,8 @@ export class CustomWorld extends World {
    public page!: Page;
    public browser!: Browser;
    public context!: BrowserContext;
-   public pages!: PageManager;   
+   public pages!: PageManager;  
+   public productsInCart: {name:string,quantity:number}[] = []; 
    
    constructor(options: IWorldOptions) {
        super(options);
@@ -28,7 +30,7 @@ export class CustomWorld extends World {
         const browserType = browsers[browserName as keyof typeof browsers];
         console.log(`Running on ENV=${env}, BROWSER=${browserName}, HEADLESS=${isheadless}`);
 
-        this.browser = await browserType.launch({ headless:isheadless});
+        this.browser = await browserType.launch({ headless:isheadless,slowMo:1000});
         this.context = await this.browser.newContext({
         recordVideo: { dir: 'videos/' },
 });

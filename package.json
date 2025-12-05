@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js features/login.feature",
+    "test": "cucumber-js features/*.feature",
     "dry-run": "npx cucumber-js --dry-run --format summary --config cucumber.json",
     "allure:generate": "npx allure generate allure-results --clean -o allure-report",
     "allure:open": "npx allure open allure-report",

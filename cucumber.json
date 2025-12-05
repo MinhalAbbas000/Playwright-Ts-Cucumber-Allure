@@ -1,6 +1,6 @@
 {
     "default":{
-        "paths":["tests/features/productList.feature"],
+        "paths":["tests/features/*.feature"],
         "require":["tests/steps/*.ts",
             "src/support/hooks.ts",
             "src/support/world.ts"
