@@ -1,0 +1,56 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","11595","See multiple products on the list","","Fri Dec 05 05:35:18 UTC 2025","failed","Fri Dec 05 05:35:30 UTC 2025","","","",""
+"As a logged-in user I want to add items to cart from the product details page
+    So that I can make purchases","37776","User should be able to add items to cart form product details page and cart should show count of the items added.","","Fri Dec 05 05:30:51 UTC 2025","broken","Fri Dec 05 05:31:28 UTC 2025","","","",""
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","36545","Validate prices for each of the products","","Fri Dec 05 05:35:30 UTC 2025","failed","Fri Dec 05 05:36:06 UTC 2025","","","",""
+"As a user
+    I want to login to the application
+    So that I can access the inventory","10578","Successful login with valid credentials","","Fri Dec 05 05:33:59 UTC 2025","failed","Fri Dec 05 05:34:10 UTC 2025","","","",""
+"As a logged-in user I want to add items to cart from the product details page
+    So that I can make purchases","37722","User should be able to add items to cart form product details page and cart should show count of the items added.","","Fri Dec 05 05:31:28 UTC 2025","broken","Fri Dec 05 05:32:06 UTC 2025","","","",""
+"As a user
+    I want to login to the application
+    So that I can access the inventory","4414","Failed login with invalid credentials","","Fri Dec 05 05:34:10 UTC 2025","passed","Fri Dec 05 05:34:14 UTC 2025","","","",""
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","36666","Validate description for each of the products","","Fri Dec 05 05:37:56 UTC 2025","broken","Fri Dec 05 05:38:33 UTC 2025","","","",""
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","5584","Validate currency symbol for all product prices","","Fri Dec 05 05:39:10 UTC 2025","passed","Fri Dec 05 05:39:15 UTC 2025","","","",""
+"As a logged-in user
+    I want to see product Details of the selected product 
+    This includes product name, price and description.
+    So that I can see product info before purchasing.","37568","Verfiy details of the selected product","","Fri Dec 05 05:34:18 UTC 2025","broken","Fri Dec 05 05:34:55 UTC 2025","","","",""
+"As a logged-in user I want to add items to cart from product list page
+    So that I can purchase them","38844","Adding products to cart should show badge icon on the cart","","Fri Dec 05 05:30:12 UTC 2025","broken","Fri Dec 05 05:30:51 UTC 2025","","","",""
+"As a logged-in user I want to see all products added to cart
+    So that I can make purchases","37646","On the cart all products added to the cart should be display correct price","","Fri Dec 05 05:33:21 UTC 2025","broken","Fri Dec 05 05:33:59 UTC 2025","","","",""
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","36665","Validate prices for each of the products","","Fri Dec 05 05:36:43 UTC 2025","failed","Fri Dec 05 05:37:20 UTC 2025","","","",""
+"As a logged-in user I want to see all products added to cart
+    So that I can make purchases","37632","On the cart all products added to the cart should be display correct qauntities","","Fri Dec 05 05:32:44 UTC 2025","broken","Fri Dec 05 05:33:21 UTC 2025","","","",""
+"As a user
+    I want to login to the application
+    So that I can access the inventory","3408","Failed login with empty username","","Fri Dec 05 05:34:14 UTC 2025","passed","Fri Dec 05 05:34:18 UTC 2025","","","",""
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","11631","See multiple products on the list","","Fri Dec 05 05:34:55 UTC 2025","failed","Fri Dec 05 05:35:07 UTC 2025","","","",""
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","36691","Validate description for each of the products","","Fri Dec 05 05:37:20 UTC 2025","broken","Fri Dec 05 05:37:56 UTC 2025","","","",""
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","11543","See multiple products on the list","","Fri Dec 05 05:35:07 UTC 2025","failed","Fri Dec 05 05:35:18 UTC 2025","","","",""
+"As a logged-in user I want to see all products added to cart
+    So that I can make purchases","37656","On the cart all products added to the cart should be displayed","","Fri Dec 05 05:32:06 UTC 2025","broken","Fri Dec 05 05:32:44 UTC 2025","","","",""
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","36629","Validate prices for each of the products","","Fri Dec 05 05:36:06 UTC 2025","failed","Fri Dec 05 05:36:43 UTC 2025","","","",""
+"As a logged-in user
+    I want to see products on the product list
+    So that I can select items to purchase","36688","Validate description for each of the products","","Fri Dec 05 05:38:33 UTC 2025","broken","Fri Dec 05 05:39:10 UTC 2025","","","",""

@@ -1,0 +1,1 @@
+Trace file: /home/runner/work/Playwright-Ts-Cucumber-Allure/Playwright-Ts-Cucumber-Allure/reports/traces/Adding_products_to_cart_should_show_badge_icon_on_the_cart.zip

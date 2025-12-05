@@ -1,0 +1,1 @@
+Trace file: /home/runner/work/Playwright-Ts-Cucumber-Allure/Playwright-Ts-Cucumber-Allure/reports/traces/On_the_cart_all_products_added_to_the_cart_should_be_display_correct_qauntities.zip

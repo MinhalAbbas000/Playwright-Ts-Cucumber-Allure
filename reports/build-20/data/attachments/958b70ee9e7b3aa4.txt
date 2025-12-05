@@ -1,0 +1,1 @@
+Trace file: /home/runner/work/Playwright-Ts-Cucumber-Allure/Playwright-Ts-Cucumber-Allure/reports/traces/Verfiy_details_of_the_selected_product.zip
