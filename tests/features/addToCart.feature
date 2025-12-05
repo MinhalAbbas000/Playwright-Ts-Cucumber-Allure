@@ -7,7 +7,7 @@ Background:
     And I navigate to the product list page
 
 Scenario Outline: Adding products to cart should show badge icon on the cart
-    When I add "<quantity>" "<productName>" item to cart
+    When I add <quantity> "<productName>" item to cart
     Then badge on the cart should display "<quantity>"
 
 Examples: 

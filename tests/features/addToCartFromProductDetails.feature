@@ -10,7 +10,7 @@ Background:
 Scenario Outline: User should be able to add items to cart form product details page and cart should show count of the items added.
    When I click on "<productName>" title
    Then product details page should be opened
-   When I add "<quantity>" "<productName>" item to carts from product details page.
+   When I add <quantity> "<productName>" item to carts from product details page.
    Then badge on the cart should display "<quantity>"
 
 Examples: 

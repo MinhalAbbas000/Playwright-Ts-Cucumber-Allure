@@ -11,27 +11,27 @@ When('I click on add to cart icon',async function(this:CustomWorld){
 
 Then('I should see the cart page listing all added items',async function(this:CustomWorld){
 
-       for(let i=0 ; i<this.productsInCart.length;i++)
+       for(let i=0 ; i<this.testContext.productsInCart.length;i++)
        {
-        await expect(this.pages.cartPage.getproductDetailsLocator(this.productsInCart[i].name)).toBeVisible();
+        await expect(this.pages.cartPage.getproductDetailsLocator(this.testContext.productsInCart[i].name)).toBeVisible();
        }
 })
 
 
 Then('I should see the cart page listing all added items with correct qantities',async function(this:CustomWorld){
 
-       for(let i=0 ; i<this.productsInCart.length;i++)
+       for(let i=0 ; i<this.testContext.productsInCart.length;i++)
        {
-        await expect(this.pages.cartPage.getProductQuanityLocator(this.productsInCart[i].name)).toHaveText(this.productsInCart[i].quantity.toString());
+        await expect(this.pages.cartPage.getProductQuanityLocator(this.testContext.productsInCart[i].name)).toHaveText(this.testContext.productsInCart[i].quantity.toString());
        }
 })
 
 
 Then('I should see the cart page listing all added items with correct price',async function(this:CustomWorld){
 
-       for(let i=0 ; i<this.productsInCart.length;i++)
+       for(let i=0 ; i<this.testContext.productsInCart.length;i++)
        {
-        const priceOfProduct = ProductData.find(p=>p.title===this.productsInCart[i].name)?.price;
-        await expect(await (this.pages.cartPage.getProductPriceLocator(this.productsInCart[i].name).textContent())).toContain(priceOfProduct?.toString());
+        const priceOfProduct = ProductData.find(p=>p.title===this.testContext.productsInCart[i].name)?.price;
+        await expect(await (this.pages.cartPage.getProductPriceLocator(this.testContext.productsInCart[i].name).textContent())).toContain(priceOfProduct?.toString());
        }
 })

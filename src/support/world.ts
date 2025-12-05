@@ -4,7 +4,7 @@ import { PageManager } from "../pages/pageManager";
 import * as dotenv from "dotenv";
 import * as path from "path";
 import { ConfigManager } from "../config/configManager";
-import { Product } from "../types";
+import { TestContext } from "../types";
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 
@@ -15,7 +15,7 @@ export class CustomWorld extends World {
    public browser!: Browser;
    public context!: BrowserContext;
    public pages!: PageManager;  
-   public productsInCart: {name:string,quantity:number}[] = []; 
+   public testContext!: TestContext; 
    
    constructor(options: IWorldOptions) {
        super(options);
@@ -42,6 +42,11 @@ export class CustomWorld extends World {
         this.page = await this.context.newPage();
 
         this.pages = new PageManager(this.page);
+        this.testContext = {
+            productsInCart: [],
+            currentUser: null
+
+        }
     }
 
     async close(){
