@@ -5,11 +5,11 @@ import { ProductData } from '../../src/testData/product-data';
 import { CustomWorld } from '../../src/support/world';
 import { ConfigManager } from '../../src/config/configManager';
 
-When('I navigate to the product list page', async function () {
-    await this.pages.productsPage.naigateToRoute("inventory");
+When('I navigate to the product list page', async function (this:CustomWorld) {
+    await this.pages.productsPage.navigateToRoute("inventory");
 });
 
-Then('I should see the product {string} on the list', async function (productName:string) {
+Then('I should see the product {string} on the list', async function (this:CustomWorld,productName:string) {
     await Assert.that(async () => {   
      await expect(this.pages.productsPage.productLocatorByName(productName)).toBeVisible();
     }, `Product ${productName} is not visible on the product list`);
@@ -21,7 +21,7 @@ Then('I should see the {string} for the product {string} is correct', async func
     });
 });
 
-Then('I should see the description for the product {string} is correct', async function(productName: string) {
+Then('I should see the description for the product {string} is correct', async function(this:CustomWorld, productName: string) {
 
     const actualProductDescription = await this.pages.productsPage.getProductDescription(productName);
     const expectedProduct = ProductData.find(p => p.title === productName);

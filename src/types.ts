@@ -17,6 +17,7 @@ export interface Product {
 export type TestContext = {
   currentUser: User | null;
   productsInCart: {name: string; quantity: number}[];
+  currentProductName: string | null;
 }
 
 

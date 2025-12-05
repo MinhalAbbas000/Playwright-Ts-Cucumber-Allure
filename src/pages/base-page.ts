@@ -9,7 +9,7 @@ export class BasePage {
         this.page = page;
     }
 
-    async naigateToRoute(routeKey: RouteKey) {
+    async navigateToRoute(routeKey: RouteKey) {
         const baseUrl = ConfigManager.get("baseUrl");
         const route = Routes[routeKey];
         await this.page.goto(baseUrl + route);

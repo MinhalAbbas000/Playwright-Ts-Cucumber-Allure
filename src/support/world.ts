@@ -44,7 +44,8 @@ export class CustomWorld extends World {
         this.pages = new PageManager(this.page);
         this.testContext = {
             productsInCart: [],
-            currentUser: null
+            currentUser: null,
+            currentProductName: null
 
         }
     }

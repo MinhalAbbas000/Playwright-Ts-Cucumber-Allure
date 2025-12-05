@@ -6,10 +6,9 @@ import { CustomWorld } from '../../src/support/world';
 import { loginData } from "../../src/testData/login-data";
 import type { User } from "../../src/types";
 
-let currentUser: User;
 
 Given('I use login data set {string}', function (userKey: keyof typeof loginData) {
-   currentUser = loginData[userKey];
+   this.testContext.currentUser = loginData[userKey];
 });
 
 Given('I navigate to the application', async function () {
@@ -20,7 +19,7 @@ Given('I navigate to the application', async function () {
 
 When('I enter username', async function () {
 
-    await this.pages.loginPage.enterUserName(currentUser.username);
+    await this.pages.loginPage.enterUserName( this.testContext.currentUser.username);
 });
 
 When('I enter username {string}', async function (username:string) {
@@ -30,7 +29,7 @@ When('I enter username {string}', async function (username:string) {
 
 
 When('I enter password', async function () {
-    await this.pages.loginPage.enterPassword(currentUser.password);
+    await this.pages.loginPage.enterPassword( this.testContext.currentUser.password);
 });
 
 When('I enter password {string}', async function (password:string) {

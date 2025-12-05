@@ -5,9 +5,9 @@ import { CustomWorld } from '../../src/support/world';
 import { ConfigManager } from '../../src/config/configManager';
 import { expect } from "playwright/test";
 
-let _productName: string;
+
 When('I click on {string} title', async function(this:CustomWorld,productName: string) {
-    _productName = productName
+    this.testContext.currentProductName = productName;
     await this.pages.productsPage.clickOnProductTitle(productName)
 });
 
@@ -20,22 +20,22 @@ Then('product details page should be opened',async function(this:CustomWorld){
 
 Then('I should see product name', async function(this:CustomWorld){
     await Assert.that(async ()=>{
-        await expect(this.pages.productDetailsPage.productName).toHaveText(_productName);
+        await expect(this.pages.productDetailsPage.productName).toHaveText(this.testContext.currentProductName!);
     })
 })
 
 Then('I should see product description',async function(this:CustomWorld){
-    let productDescription = ProductData.find(p => p.title===_productName)?.description;
+    let productDescription = ProductData.find(p => p.title===this.testContext.currentProductName)?.description;
     await Assert.that(async()=>{
         await expect(await (this.pages.productDetailsPage.productDescription).textContent()).toBe(productDescription);
     },"Description fails to match");
 })
 
 Then('I should see product price',async function(this:CustomWorld){
-    let productPrice  = ProductData.find(p => p.title===_productName)?.price;
+    let productPrice  = ProductData.find(p => p.title===this.testContext.currentProductName)?.price;
 
     await Assert.that(async()=>{
-        await expect(await this.pages.productDetailsPage.getProductPrice(_productName)).toBe(productPrice);
+        await expect(await this.pages.productDetailsPage.getProductPrice(this.testContext.currentProductName!)).toBe(productPrice);
     })
 })
 
