@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Assertion Failures",
+    "messageRegex": ".*Assertion failed.*"
+  },
+  {
+    "name": "Locator Visibility Errors",
+    "messageRegex": ".*toBeVisible.*"
+  }
+]

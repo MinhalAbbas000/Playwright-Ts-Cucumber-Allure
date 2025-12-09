@@ -2,6 +2,7 @@
 import * as dotenv from "dotenv";
 import * as path from "path";
 import { EnvConfig } from "../config/env.config";
+import { logger } from '../../utils/logger'
 
 // Load .env (local overrides)
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
@@ -65,7 +66,10 @@ export class ConfigManager {
     case "currency":
       return this.getCurrencyStymbol();
     default:
+      {
+      logger.error(`Unknown config key:" ${key}`);
       throw new Error(`Unknown config key: ${key}`);
+      }
   }
   }
 }

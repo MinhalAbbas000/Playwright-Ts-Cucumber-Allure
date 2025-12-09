@@ -8,7 +8,7 @@ Background:
 
 Scenario Outline: Adding products to cart should show badge icon on the cart
     When I add <quantity> "<productName>" item to cart
-    Then badge on the cart should display "<quantity>"
+    Then badge on the cart should display <quantity>
 
 Examples: 
    | productName                | quantity |

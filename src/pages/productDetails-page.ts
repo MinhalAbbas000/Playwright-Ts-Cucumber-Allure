@@ -1,5 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './base-page';
+import { logger } from '../../utils/logger';
 
 export class ProductDetailsPage extends BasePage {
 
@@ -24,6 +25,7 @@ export class ProductDetailsPage extends BasePage {
         let productPrice : number;
         let productPriceText = await this.productPrice.textContent();
         productPrice = Number(productPriceText?.replace('$', '') || '0');
+        logger.info(`The price fetched is ${productPrice}`);
         return productPrice;
     }
 

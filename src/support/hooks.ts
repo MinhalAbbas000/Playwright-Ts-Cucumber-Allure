@@ -2,12 +2,17 @@ import {Before, After, BeforeAll, AfterAll, Status} from '@cucumber/cucumber';
 import fs from 'fs';
 import path from 'path';
 import { CustomWorld } from './world';
+import { logger } from '../../utils/logger';
+import { EnvConfig } from "../config/env.config";
+import { ConfigManager } from '../config/configManager';
+
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 
 BeforeAll(async function () {
   const allureResults = path.resolve("./allure-results");
   const allureReport = path.resolve("./allure-report");
+
 
   // Preserve Allure history before cleaning
   const historySrc = path.join(allureReport, "history");
@@ -21,19 +26,64 @@ BeforeAll(async function () {
   // Clean previous run data except history
   const items = await fs.promises.readdir(allureResults).catch(() => []);
   for (const item of items) {
-    if (item !== "history") {
+    if (item !== "history" && item!=="categories.json") {
       await fs.promises.rm(path.join(allureResults, item), { recursive: true, force: true });
     }
   }
 
-  console.log("🧹 Cleaned allure-results (kept history if present)");
+  logger.info("Cleaned allure-results (kept history if present)");
+
+// Created environment details file
+   const envDetails = `
+   Browser=${ConfigManager.get('browser')}
+   Environment=${ConfigManager.get('baseUrl')}
+   Headless=${ConfigManager.get('headless')}
+   OS=${process.platform}
+   NodeVer=${process.version}
+   BuildNumber=${process.env.GITHUB_RUN_NUMBER || "local-run"}`.trim();
+
+   await fs.promises.writeFile(path.join(allureResults,"environment.properties"),envDetails,'utf-8');
+   logger.info("Allure Environment details file is created");
+
+  // Created executor file for CI details
+    const isCI = process.env.GITHUB_ACTIONS === "true";
+
+    const executorJson = isCI? {
+    name: "GitHub Actions",
+    type: "github",
+    buildName: `GitHub Run #${process.env.GITHUB_RUN_NUMBER}`,
+    buildOrder: Number(process.env.GITHUB_RUN_NUMBER),
+    buildUrl: `https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`,
+    reportUrl: "", // You can fill this if you host your Allure report publicly
+    url: `https://github.com/${process.env.GITHUB_REPOSITORY}`
+  }:
+  {
+    name: "Local Machine",
+    type: "local",
+    buildName: "Local Run",
+    buildOrder: 0,
+    buildUrl: "",
+    reportUrl: "",
+    url: "http://localhost"
+  }
+
+    fs.writeFileSync(
+    path.join(allureResults, "executor.json"),
+    JSON.stringify(executorJson, null, 2),
+    "utf-8"
+  );
+  logger.info("Allure executor details file is created");
+
+  // Copy categories folder
+  const masterCategories = path.resolve("./src/allureConfig/categories.json");
+  const destCategories = path.join(allureResults, "categories.json");
+
+  await fs.promises.copyFile(masterCategories, destCategories);
+
 });
 
-After(async function (this: CustomWorld) {
-    await this.close();
-});
-
-Before(async function (this: CustomWorld) {
+Before(async function (this: CustomWorld,scenario) {
+    logger.info(`--- Starting Scenario : ${scenario.pickle.name} : ${scenario.pickle.id} ---`);
     await this.init();
 });
 
@@ -60,7 +110,6 @@ const screenshotPath = path.join(screenshotsDir, `${scenarioName}.png`);
    await this.attach(`Trace file: ${tracePath}`);
      const videoPath = await this.page.video()?.path();
     if (videoPath) {
-        await this.close();
         await delay(1000);
       const finalVideoPath = path.join(videosDir, `${scenarioName}.webm`);
       try {
@@ -78,7 +127,6 @@ const screenshotPath = path.join(screenshotsDir, `${scenarioName}.png`);
     } catch (e) {}
   }
     await this.close();
-
 });
 
 

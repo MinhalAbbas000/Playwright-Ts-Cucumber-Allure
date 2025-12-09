@@ -11,7 +11,7 @@ When('I add {int} {string} item to cart', async function(this:CustomWorld, quant
     }
 });
 
-Then('badge on the cart should display {string}', async function (this: CustomWorld, quantity: number) {
+Then('badge on the cart should display {int}', async function (this: CustomWorld, quantity: number) {
 
     await Assert.that(async () => {
         await expect(await this.pages.productsPage.cartBadge.textContent()).toBe(quantity)

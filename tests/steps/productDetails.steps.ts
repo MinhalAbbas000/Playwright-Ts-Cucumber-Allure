@@ -4,6 +4,7 @@ import { ProductData } from '../../src/testData/product-data';
 import { CustomWorld } from '../../src/support/world';
 import { ConfigManager } from '../../src/config/configManager';
 import { expect } from "playwright/test";
+import { logger } from "../../utils/logger";
 
 
 When('I click on {string} title', async function(this:CustomWorld,productName: string) {
@@ -32,8 +33,13 @@ Then('I should see product description',async function(this:CustomWorld){
 })
 
 Then('I should see product price',async function(this:CustomWorld){
-    let productPrice  = ProductData.find(p => p.title===this.testContext.currentProductName)?.price;
-
+    let product  = ProductData.find(p => p.title===this.testContext.currentProductName);
+    if (!product) 
+        {
+            logger.error("Product not found in the test data");
+            throw new Error(`No test data for product "${this.testContext.currentProductName}"`)
+        };
+    let productPrice = product.price;
     await Assert.that(async()=>{
         await expect(await this.pages.productDetailsPage.getProductPrice(this.testContext.currentProductName!)).toBe(productPrice);
     })

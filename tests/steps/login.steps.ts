@@ -5,6 +5,7 @@ import { ConfigManager } from '../../src/config/configManager';
 import { CustomWorld } from '../../src/support/world';
 import { loginData } from "../../src/testData/login-data";
 import type { User } from "../../src/types";
+import { logger } from '../../utils/logger';
 
 
 Given('I use login data set {string}', function (userKey: keyof typeof loginData) {
@@ -36,7 +37,8 @@ When('I enter password {string}', async function (password:string) {
     await this.pages.loginPage.enterPassword(password);
 });
 
-When('I click the login button', async function () {
+When('I click the login button', async function (this:CustomWorld) {
+    logger.info(`${this.testContext.currentUser?.username} is successfully logged in`)
     await this.pages.loginPage.clickLogin();
 });
 

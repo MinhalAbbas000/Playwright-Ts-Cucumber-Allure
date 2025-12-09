@@ -11,7 +11,7 @@ Scenario Outline: User should be able to add items to cart form product details 
    When I click on "<productName>" title
    Then product details page should be opened
    When I add <quantity> "<productName>" item to carts from product details page.
-   Then badge on the cart should display "<quantity>"
+   Then badge on the cart should display <quantity>
 
 Examples: 
    | productName                | quantity |
