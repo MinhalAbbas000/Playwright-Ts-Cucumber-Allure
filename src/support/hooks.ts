@@ -33,6 +33,8 @@ BeforeAll(async function () {
 
   logger.info("Cleaned allure-results (kept history if present)");
 
+  await fs.promises.mkdir(allureResults, { recursive: true });
+  
 // Created environment details file
    const envDetails = `
    Browser=${ConfigManager.get('browser')}
