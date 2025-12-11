@@ -33,17 +33,17 @@ A clean, scalable end‑to‑end automation framework built using Playwright, Cu
 
 ## Installation
 Clone this repo
-Run npm install.
+``` Run npm install.
 
 ## How to run tests locally
 npm run test:report
 This will run the test and lauches allure report
 
 ## How to run tests on github Actions
-Select "Playwright cucumber test" workflow
-Select the desired enviroment on which you want to run tests
-Select the desired browser
-Click run workflow
+- Select "Playwright cucumber test" workflow
+- Select the desired enviroment on which you want to run tests
+- Select the desired browser
+- Click run workflow
 
 
 
