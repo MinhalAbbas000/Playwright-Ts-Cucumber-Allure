@@ -33,7 +33,7 @@ A clean, scalable end‑to‑end automation framework built using Playwright, Cu
 
 ## Installation
 Clone this repo
-``` Run npm install.
+``` Run npm install.```
 
 ## How to run tests locally
 npm run test:report
