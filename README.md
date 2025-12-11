@@ -32,11 +32,12 @@ A clean, scalable end‑to‑end automation framework built using Playwright, Cu
 
 
 ## Installation
-Clone this repo
-``` Run npm install.```
+- Clone this repo
+- Run 
+```npm install.```
 
 ## How to run tests locally
-npm run test:report
+```npm run test:report```
 This will run the test and lauches allure report
 
 ## How to run tests on github Actions
