@@ -33,12 +33,14 @@ A clean, scalable end‑to‑end automation framework built using Playwright, Cu
 
 ## Installation
 - Clone this repo
-- Run 
+- Run <br>
 ```npm install.```
 
 ## How to run tests locally
-```npm run test:report```
-This will run the test and lauches allure report
+This will run the tests and launches allure report <br>
+```npm run test:report``` <br>
+To run tests on specific browser or environment<br>
+``` npx cross-env ENV=${{ env.ENV }} BROWSER=${{ env.BROWSER }} npm run test```
 
 ## How to run tests on github Actions
 - Select "Playwright cucumber test" workflow
