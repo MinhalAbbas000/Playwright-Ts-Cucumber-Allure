@@ -4,8 +4,7 @@ Feature: Product Details Page
     This includes product name, price and description.
     So that I can see product info before purchasing.
 Background:
-    Given I navigate to the application and login
-    And I navigate to the product list page
+    Given I navigate to the product list page
 
 Scenario: Verfiy details of the selected product
     When I click on "Sauce Labs Backpack" title

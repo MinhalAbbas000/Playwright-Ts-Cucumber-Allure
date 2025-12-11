@@ -3,8 +3,7 @@ Feature: Cart should display all products user added along with their quantity a
     So that I can make purchases
 
 Background: 
-    Given I navigate to the application and login
-    And I navigate to the product list page
+    Given I navigate to the product list page
 
 Scenario: On the cart all products added to the cart should be displayed
     When I add 1 "Sauce Labs Fleece Jacket" item to cart

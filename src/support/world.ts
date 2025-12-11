@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import * as path from "path";
 import { ConfigManager } from "../config/configManager";
 import { TestContext } from "../types";
+import { ensureAuth } from "../auth-manager";
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 
@@ -21,6 +22,7 @@ export class CustomWorld extends World {
        super(options);
    }            
     async init() {
+        await ensureAuth();
         const env = ConfigManager.get("env");
         const browserName = ConfigManager.get("browser");
         const isheadless = ConfigManager.get("headless") as boolean;
@@ -32,6 +34,7 @@ export class CustomWorld extends World {
 
         this.browser = await browserType.launch({ headless:isheadless,slowMo:1000});
         this.context = await this.browser.newContext({
+        storageState: 'auth.json',
         recordVideo: { dir: 'videos/' },
 });
 

@@ -9,6 +9,7 @@ node_modules/
 .vscode/
 .env
 /logs
+auth.json
 
 # Allure
 /allure-report/

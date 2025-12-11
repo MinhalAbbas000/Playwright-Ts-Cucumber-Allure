@@ -4,7 +4,7 @@ Feature: Product list visibility
     So that I can select items to purchase
 
     Background:
-        Given I navigate to the application and login
+        Given I navigate to the product list page 
 
     Scenario Outline: See multiple products on the list
         When I navigate to the product list page

@@ -3,8 +3,7 @@ Feature: I want to add items to cart from product details page
     So that I can make purchases
 
 Background:
-    Given I navigate to the application and login
-    And I navigate to the product list page
+    Given I navigate to the product list page
 
 
 Scenario Outline: User should be able to add items to cart form product details page and cart should show count of the items added.

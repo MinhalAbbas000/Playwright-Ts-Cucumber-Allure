@@ -112,6 +112,7 @@ const screenshotPath = path.join(screenshotsDir, `${scenarioName}.png`);
    await this.attach(`Trace file: ${tracePath}`);
      const videoPath = await this.page.video()?.path();
     if (videoPath) {
+        await this.close();
         await delay(1000);
       const finalVideoPath = path.join(videosDir, `${scenarioName}.webm`);
       try {
@@ -130,5 +131,23 @@ const screenshotPath = path.join(screenshotsDir, `${scenarioName}.png`);
   }
     await this.close();
 });
+
+AfterAll(async function() {
+  // Remove the auth file
+    try {
+    await fs.promises.rm('auth.json');
+    console.log('auth.json deleted after all tests');
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      // file does not exist, ignore
+      console.log('auth.json not found, skipping delete');
+    } else {
+      throw err;
+    }
+  }
+})
+{
+
+}
 
 

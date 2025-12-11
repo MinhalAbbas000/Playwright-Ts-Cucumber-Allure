@@ -3,8 +3,7 @@ Feature: Add items to cart
     So that I can purchase them
 
 Background:
-    Given I navigate to the application and login
-    And I navigate to the product list page
+    Given I navigate to the product list page
 
 Scenario Outline: Adding products to cart should show badge icon on the cart
     When I add <quantity> "<productName>" item to cart
